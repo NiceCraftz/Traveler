@@ -3,6 +3,6 @@ version: '${project.version}'
 main: tech.calista.traveler.Traveler
 api-version: 1.19
 prefix: Traveler
-authors: [NiceCraftz]
+authors: [ NiceCraftz ]
 description: Make your players enjoy exploring the world.
 website: https://t.me/CraftzLounge
