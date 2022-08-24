@@ -6,7 +6,7 @@ public final class Traveler extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("Testing GitHub Bot!");
+        getLogger().info("Testing GitHub Bot for Telegram!");
 
     }
 
