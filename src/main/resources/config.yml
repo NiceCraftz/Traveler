@@ -1,0 +1,24 @@
+database:
+  type: "SQLITE" # or "MYSQL"
+  user: "root"
+  password: 'password'
+  host: "localhost"
+  port: 3306
+  database: "traveler"
+
+
+settings:
+  sound:
+    enabled: true
+    name: "UI_TOAST_CHALLENGE_COMPLETE"
+    volume: 0.5
+    pitch: 0
+  title:
+    enabled: true
+    main: "<gold><bold>Traveler"
+    sub: "<gray><bold>A simple plugin to teleport to your favorite locations"
+    fade-in: 10
+    stay: 70
+    fade-out: 20
+  effects:
+    - "INVISIBILITY:10:1" # Effect:Duration(seconds):Amplifier
