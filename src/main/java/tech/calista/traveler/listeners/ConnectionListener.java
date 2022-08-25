@@ -16,11 +16,10 @@ public class ConnectionListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-
         User user = traveler.getUserDao().read(player.getUniqueId());
 
         if (user == null) {
-            user = new User(player.getUniqueId());
+            user = new User(-1, player.getUniqueId());
             traveler.getUserDao().create(user.getUuid(), user);
         }
 

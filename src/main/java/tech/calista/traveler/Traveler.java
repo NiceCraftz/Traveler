@@ -6,7 +6,6 @@ import org.codemc.worldguardwrapper.WorldGuardWrapper;
 import org.codemc.worldguardwrapper.flag.IWrappedFlag;
 import tech.calista.traveler.database.SQLManager;
 import tech.calista.traveler.database.credentials.Credentials;
-import tech.calista.traveler.database.impl.MySQL;
 import tech.calista.traveler.database.impl.SQLite;
 import tech.calista.traveler.listeners.ConnectionListener;
 import tech.calista.traveler.listeners.DiscoveryListener;

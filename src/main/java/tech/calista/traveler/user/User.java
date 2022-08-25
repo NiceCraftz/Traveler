@@ -2,28 +2,28 @@ package tech.calista.traveler.user;
 
 import com.google.common.collect.Sets;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 
 @Getter
 @Setter
+@RequiredArgsConstructor
 public class User {
+    private final int id;
     private final UUID uuid;
-    private final Set<String> discoveries;
+    private final Set<String> discoveries = Sets.newHashSet();
 
-    public User(UUID uuid) {
-        this(uuid, null);
+    private boolean update = false;
+
+    public void addDiscovery(String discovery) {
+        discoveries.add(discovery);
+        update = true;
     }
 
-    public User(UUID uuid, Collection<String> discoveries) {
-        this.uuid = uuid;
-        this.discoveries = Sets.newHashSet();
-
-        if (discoveries != null) {
-            this.discoveries.addAll(discoveries);
-        }
+    public boolean hasDiscovery(String discovery) {
+        return discoveries.contains(discovery);
     }
 }
