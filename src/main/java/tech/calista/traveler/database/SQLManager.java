@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import tech.calista.traveler.Traveler;
 
+import java.sql.ResultSet;
+
 @Getter
 @Setter
 public abstract class SQLManager {
@@ -27,6 +29,11 @@ public abstract class SQLManager {
         disconnect();
         connect();
     }
+
+
+    public abstract ResultSet query(String sql);
+
+    public abstract void update(String sql);
 
 
 }
