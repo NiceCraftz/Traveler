@@ -12,7 +12,8 @@ public class UserDao implements Dao<UUID, User> {
 
     @Override
     public void create(UUID key, User value) {
-
+        String sql = "INSERT INTO traveler_users (uuid) VALUES (?)";
+        sqlManager.updateAsync(sql, key.toString());
     }
 
     @Override

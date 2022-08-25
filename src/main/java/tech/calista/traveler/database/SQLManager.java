@@ -6,6 +6,7 @@ import lombok.Setter;
 import tech.calista.traveler.Traveler;
 
 import java.sql.ResultSet;
+import java.util.concurrent.CompletableFuture;
 
 @Getter
 @Setter
@@ -19,6 +20,8 @@ public abstract class SQLManager {
 
     public abstract void connect();
 
+    public abstract void createTable();
+
     public void disconnect() {
         if (dataSource != null) {
             dataSource.close();
@@ -31,9 +34,17 @@ public abstract class SQLManager {
     }
 
 
-    public abstract ResultSet query(String sql);
+    public abstract ResultSet query(String sql, Object... params);
 
-    public abstract void update(String sql);
+    public CompletableFuture<ResultSet> queryAsync(String sql, Object... params) {
+        return CompletableFuture.supplyAsync(() -> query(sql, params));
+    }
+
+    public abstract void update(String sql, Object... params);
+
+    public CompletableFuture<Void> updateAsync(String sql, Object... params) {
+        return CompletableFuture.runAsync(() -> update(sql));
+    }
 
 
 }
