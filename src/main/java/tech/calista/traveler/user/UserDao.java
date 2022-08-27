@@ -4,43 +4,36 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import tech.calista.traveler.dao.Dao;
 import tech.calista.traveler.database.SQLManager;
-import tech.calista.traveler.database.queries.Query;
 
-import java.sql.ResultSet;
 import java.util.UUID;
 
 @RequiredArgsConstructor
 public class UserDao implements Dao<UUID, User> {
+
     private final SQLManager sqlManager;
 
     @Override
     public void create(UUID key, User value) {
-        sqlManager.updateAsync(Query.INSERT_USER.getQuery(), key.toString());
+        if (value.getDiscoveries().isEmpty()) return;
+
+        String sql = "INSERT INTO traveler_data (uuid, discovery) VALUES (?, ?) ON DUPLICATE KEY UPDATE discovery = discovery, uuid = uuid";
+        for (String discovery : value.getDiscoveries()) {
+            sqlManager.updateAsync(sql, key.toString(), discovery);
+        }
     }
 
     @Override
     @SneakyThrows
     public User read(UUID key) {
-        try (ResultSet resultSet = sqlManager.query(Query.SELECT_USER.getQuery(), key.toString())) {
-            int id = resultSet.getInt("id");
-            User user = new User(id, key);
-
-            while (resultSet.next()) {
-                user.addDiscovery(resultSet.getString("discovery"));
-            }
-        }
-
-
-        return null;
+        String sql = "SELECT * FROM traveler_data WHERE uuid = ?";
+        return new User(key); // TODO: Implement
     }
 
     @Override
-    public void update(UUID key, User value) {
-
+    public void update(User value) {
     }
 
     @Override
     public void delete(UUID key) {
-
     }
 }

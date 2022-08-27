@@ -5,7 +5,7 @@ public interface Dao<K, V> {
 
     V read(K key);
 
-    void update(K key, V value);
+    void update(V value);
 
     void delete(K key);
 

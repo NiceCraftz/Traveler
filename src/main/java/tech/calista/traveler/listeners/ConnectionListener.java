@@ -19,7 +19,7 @@ public class ConnectionListener implements Listener {
         User user = traveler.getUserDao().read(player.getUniqueId());
 
         if (user == null) {
-            user = new User(-1, player.getUniqueId());
+            user = new User(player.getUniqueId());
             traveler.getUserDao().create(user.getUuid(), user);
         }
 

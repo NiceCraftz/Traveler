@@ -12,18 +12,17 @@ import java.util.UUID;
 @Setter
 @RequiredArgsConstructor
 public class User {
-    private final int id;
     private final UUID uuid;
     private final Set<String> discoveries = Sets.newHashSet();
 
     private boolean update = false;
 
     public void addDiscovery(String discovery) {
-        discoveries.add(discovery);
+        discoveries.add(discovery.toLowerCase());
         update = true;
     }
 
     public boolean hasDiscovery(String discovery) {
-        return discoveries.contains(discovery);
+        return discoveries.contains(discovery.toLowerCase());
     }
 }

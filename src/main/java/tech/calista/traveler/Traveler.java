@@ -6,7 +6,7 @@ import org.codemc.worldguardwrapper.WorldGuardWrapper;
 import org.codemc.worldguardwrapper.flag.IWrappedFlag;
 import tech.calista.traveler.database.SQLManager;
 import tech.calista.traveler.database.credentials.Credentials;
-import tech.calista.traveler.database.impl.SQLite;
+import tech.calista.traveler.database.impl.MySQL;
 import tech.calista.traveler.listeners.ConnectionListener;
 import tech.calista.traveler.listeners.DiscoveryListener;
 import tech.calista.traveler.listeners.WalkListener;
@@ -41,12 +41,11 @@ public final class Traveler extends JavaPlugin {
     private void loadDatabase() {
         String databaseType = getConfig().getString("database.type");
 
-        if (databaseType == null || databaseType.isEmpty() || databaseType.equalsIgnoreCase("sqlite")) {
-            sqlManager = new SQLite(this);
-            return;
-        }
+//        if (databaseType == null || databaseType.isEmpty() || databaseType.equalsIgnoreCase("sqlite")) {
+//            sqlManager = new SQLite(this);
+//        }
 
-        if (databaseType.equalsIgnoreCase("mysql")) {
+        if (databaseType != null && databaseType.equalsIgnoreCase("mysql")) {
             sqlManager = new MySQL(this, new Credentials(
                     getConfig().getString("database.username"),
                     getConfig().getString("database.password"),
@@ -55,6 +54,9 @@ public final class Traveler extends JavaPlugin {
                     getConfig().getString("database.database")
             ));
         }
+
+        sqlManager.connect();
+        sqlManager.createTable();
     }
 
     private void loadInstances() {
